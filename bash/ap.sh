@@ -14,6 +14,13 @@
 #sudo systemctl disable dphys-swapfile
 #sudo apt remove --purge dphys-swapfile
 
+#disable swap and filesystem checks.
+#nano /boot/cmdline.txt
+#add fsck.mode=skip, resulting line should look like this
+#console=?? console=tty1 root=PARTUUID=?? rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait fsck.mode=skip
+
+#change ntp instead of systemd-timesyncd as filesystem is now read only
+#
 #sudo nano /etc/fstab
 #add commit=30 to 3rd line (defaults,noatime,commit=X)
 
