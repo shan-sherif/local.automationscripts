@@ -14,6 +14,14 @@
 #sudo systemctl disable dphys-swapfile
 #sudo apt remove --purge dphys-swapfile
 
+#disable updates
+#sudo systemctl mask apt-daily-upgrade
+#sudo systemctl mask apt-daily
+#sudo systemctl disable apt-daily-upgrade.timer
+#sudo systemctl disable apt-daily.timer
+
+#check other servvices by running sudo systemctl --type=service --state=running
+
 #disable swap and filesystem checks.
 #nano /boot/cmdline.txt
 #add fsck.mode=skip, resulting line should look like this
