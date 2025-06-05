@@ -9,7 +9,36 @@
 
 #disable swap
 #check usage by using free -h
-systemctl disable dphys-swapfile.service
+#systemctl disable dphys-swapfile.service
+#sudo dphys-swapfile swapoff
+#sudo systemctl disable dphys-swapfile
+#sudo apt remove --purge dphys-swapfile
+
+#sudo nano /etc/fstab
+#add commit=30 to 3rd line (defaults,noatime,commit=X)
+
+#tmpfs /tmp tmpfs defaults,noatime,size=100m  0 0
+#tmpfs /var/tmp tmpfs defaults,noatime,size=50m 0 0
+#tmpfs /var/log tmpfs defaults,noatime,size=100m 0 0
+
+#you can use sudo du -hs /path to check the file sizes of each
+#use this if you want to prevent suid run on var/log
+#tmpfs /var/log tmpfs defaults,noatime,nosuid,size=100m 0 0
+
+#change PARTUUID=xxxx-xx / ext4 defaults,noatime,ro 0 1
+#by adding ro, it becomes read only, alternatively you can do an overlay filesystem (you can do so on raspi-config)
+
+#make sure the following are located on your device, if not, create files for them.
+#sudo mkdir -p /var/log /var/tmp /var/lib/systemd
+#sudo touch /var/log/wtmp /var/log/btmp
+
+#check if mounted fs is ro by using
+#mount | grep "on / "
+
+#add the following alias to switch on ro and rw if there is a need to perform changes.
+#alias ro='sudo mount -o remount,ro /'
+#alias rw='sudo mount -o remount,rw /'
+
 
 echo "perform updates"
 apt update
