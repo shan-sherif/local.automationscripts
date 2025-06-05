@@ -56,6 +56,8 @@
 #alias ro='sudo mount -o remount,ro /'
 #alias rw='sudo mount -o remount,rw /'
 
+#to check filesystem
+#df -h
 
 echo "perform updates"
 apt update
