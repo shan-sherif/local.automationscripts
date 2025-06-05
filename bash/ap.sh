@@ -43,6 +43,8 @@
 #change PARTUUID=xxxx-xx / ext4 defaults,noatime,ro 0 1
 #by adding ro, it becomes read only, alternatively you can do an overlay filesystem (you can do so on raspi-config)
 
+#check if overlay setup is done correctly if using raspi-config with mount | grep overlay
+
 #make sure the following are located on your device, if not, create files for them.
 #sudo mkdir -p /var/log /var/tmp /var/lib/systemd
 #sudo touch /var/log/wtmp /var/log/btmp
