@@ -20,7 +20,7 @@
 #sudo systemctl disable apt-daily-upgrade.timer
 #sudo systemctl disable apt-daily.timer
 
-#check other servvices by running sudo systemctl --type=service --state=running
+#check other services by running sudo systemctl --type=service --state=running
 
 #disable swap and filesystem checks.
 #nano /boot/cmdline.txt
@@ -69,9 +69,15 @@ apt install wireguard -y
 echo "setting up wireguard vpn using config provided"
 nmcli connection import type  wireguard file $filename
 
+#alternative setup approaches
+# nmcli d wifi hotspot ifname $wlan? ssid $ssid password $password
+# nmcli connection modify Hotspot connectin.autoconnect yes
+# nmcli connection add type wifi ifname $wlan? con-name AP autoconnect yes ssid $ssid
+# nmcli connection modify AP 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.method shared wifi-sec.key-mgmt wpa-psk wifi-sec.psk $password
+
 echo "setting up ap to access"
 nmcli connection add type wifi ifname $wlan? con-name AP 802-11-wireless.mode ap 802-11-wireless.band a 802-11-wireless.channel 36 ssid $ssidname
-nmcli connection modify AP 802-11-wireless-security.key-mgmt wpa-psk wifi-sec.psk $password ipv4.method shared
+nmcli connection modify AP 802-11-wireless-security.key-mgmt wpa-psk wifi-sec.psk $password ipv4.method shared ipv6.method ignore
 nmcli connection up AP
 
 #you can use nmcli device wifi list / nmcli device wifi list ifname wlan0 to scan for wifi to connect to
